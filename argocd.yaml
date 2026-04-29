@@ -1,21 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-app
+  name: team-board
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/thisNorm/Ops_Repo.git
     targetRevision: main
-    path: .
-    directory:
-      recurse: false
-      include: argocd-app.yaml
+    path: charts/team-board
+    helm:
+      valueFiles:
+        - values-prod.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: team-board
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true
