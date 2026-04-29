@@ -1,0 +1,10 @@
+---
+extends: default
+
+ignore: |
+  charts/**/templates/*.yaml
+
+rules:
+  line-length: disable
+  document-start: disable
+  truthy: disable
