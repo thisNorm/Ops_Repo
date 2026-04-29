@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/thisNorm/Ops_Repo.git
     targetRevision: main
     path: apps
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
