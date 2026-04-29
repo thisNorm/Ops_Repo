@@ -1,0 +1,12 @@
+image:
+  tag: "latest"
+
+replicaCount: 1
+
+ingress:
+  host: dev.app.local
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
