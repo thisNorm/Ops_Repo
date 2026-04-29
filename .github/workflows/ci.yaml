@@ -15,17 +15,11 @@ jobs:
       - name: 코드 체크아웃
         uses: actions/checkout@v4
 
-      - name: Node.js 설정
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+      - name: Helm 설정
+        uses: azure/setup-helm@v4
 
-      - name: 의존성 설치
-        run: npm ci
+      - name: Helm lint 실행
+        run: helm lint charts/team-board -f charts/team-board/values-prod.yaml
 
-      - name: 린트 실행
-        run: npm run lint
-
-      - name: 테스트 실행
-        run: npm test
+      - name: Helm 렌더링 테스트
+        run: helm template team-board charts/team-board -n team-board -f charts/team-board/values-prod.yaml
