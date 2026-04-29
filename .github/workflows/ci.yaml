@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Helm 설정
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint 실행
+        run: helm lint charts/team-board -f charts/team-board/values-prod.yaml
+
+      - name: Helm 렌더링 테스트
+        run: helm template team-board charts/team-board -n team-board -f charts/team-board/values-prod.yaml
